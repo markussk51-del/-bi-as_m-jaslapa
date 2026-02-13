@@ -1,0 +1,782 @@
+<!doctype html>
+<html lang="lv">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Čībiņas — Komforts katram solim</title>
+  <meta name="description" content="Čībiņas — premium mājas apavi. Slipper čības par 18.99€." />
+
+  <style>
+    :root{
+      --bg:#ffffff;
+      --text:#1b1b1b;
+      --muted:#6b7280;
+      --line:#e5e7eb;
+      --card:#f8fafc;
+      --accent:#111827;
+      --accent2:#0f172a;
+      --pill:#f3f4f6;
+      --shadow: 0 10px 30px rgba(0,0,0,.08);
+      --radius: 18px;
+      --radius2: 24px;
+      --max: 1120px;
+    }
+    *{box-sizing:border-box}
+    html,body{height:100%}
+    body{
+      margin:0;
+      font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, "Apple Color Emoji","Segoe UI Emoji";
+      color:var(--text);
+      background:radial-gradient(1200px 600px at 20% -10%, #f5f3ff 0%, transparent 60%),
+                 radial-gradient(1200px 600px at 90% 10%, #ecfeff 0%, transparent 55%),
+                 var(--bg);
+    }
+    a{color:inherit; text-decoration:none}
+    .container{max-width:var(--max); margin:0 auto; padding:0 20px}
+
+    /* Topbar */
+    .topbar{
+      position:sticky; top:0; z-index:50;
+      backdrop-filter: blur(12px);
+      background:rgba(255,255,255,.75);
+      border-bottom:1px solid rgba(229,231,235,.7);
+    }
+    .nav{
+      display:flex; align-items:center; justify-content:space-between;
+      height:72px;
+      gap:14px;
+    }
+    .brand{
+      display:flex; align-items:center; gap:10px;
+      font-weight:800; letter-spacing:.2px;
+    }
+    .logo{
+      width:40px; height:40px; border-radius:12px;
+      background:linear-gradient(135deg,#111827,#6366f1);
+      display:grid; place-items:center;
+      box-shadow: 0 10px 20px rgba(99,102,241,.25);
+      color:white;
+      font-size:18px;
+    }
+    .navlinks{
+      display:flex; gap:18px; align-items:center;
+      color:var(--muted);
+      font-weight:600;
+    }
+    .navlinks a{padding:10px 12px; border-radius:12px}
+    .navlinks a:hover{background:var(--pill); color:var(--accent)}
+    .actions{display:flex; align-items:center; gap:10px}
+    .btn{
+      border:1px solid var(--line);
+      background:white;
+      padding:10px 14px;
+      border-radius:14px;
+      font-weight:700;
+      cursor:pointer;
+      display:inline-flex; align-items:center; gap:10px;
+      transition:.15s transform, .15s background, .15s border-color;
+    }
+    .btn:hover{transform: translateY(-1px); border-color:#d1d5db}
+    .btn.primary{
+      background:var(--accent);
+      color:white;
+      border-color:transparent;
+    }
+    .btn.primary:hover{background:var(--accent2)}
+    .badge{
+      min-width:22px; height:22px; padding:0 7px;
+      border-radius:999px;
+      background:#ef4444;
+      color:white;
+      display:grid; place-items:center;
+      font-size:12px; font-weight:800;
+    }
+
+    /* Hero */
+    .hero{padding:42px 0 10px}
+    .heroGrid{
+      display:grid;
+      grid-template-columns: 1.05fr .95fr;
+      gap:26px;
+      align-items:stretch;
+    }
+    .heroCard{
+      background:rgba(255,255,255,.75);
+      border:1px solid rgba(229,231,235,.8);
+      border-radius:var(--radius2);
+      box-shadow: var(--shadow);
+      overflow:hidden;
+    }
+    .heroLeft{padding:34px}
+    .kicker{
+      display:inline-flex; align-items:center; gap:8px;
+      padding:8px 12px;
+      background:var(--pill);
+      border:1px solid rgba(229,231,235,.8);
+      border-radius:999px;
+      font-weight:800;
+      color:#111827;
+      font-size:13px;
+    }
+    h1{
+      margin:14px 0 10px;
+      font-size:46px;
+      line-height:1.05;
+      letter-spacing:-1px;
+    }
+    .subtitle{
+      margin:0;
+      color:var(--muted);
+      font-size:16px;
+      line-height:1.6;
+      max-width:56ch;
+    }
+    .heroCtas{margin-top:18px; display:flex; gap:10px; flex-wrap:wrap}
+    .trustRow{
+      margin-top:20px;
+      display:flex; gap:10px; flex-wrap:wrap;
+      color:var(--muted);
+      font-weight:700;
+      font-size:13px;
+    }
+    .trustPill{
+      display:inline-flex; align-items:center; gap:8px;
+      padding:10px 12px;
+      border:1px solid rgba(229,231,235,.8);
+      border-radius:999px;
+      background:rgba(255,255,255,.7);
+    }
+    .heroRight{
+      display:grid;
+      grid-template-rows: 1fr auto;
+    }
+    .showcase{
+      padding:24px;
+      display:grid; place-items:center;
+      background:linear-gradient(180deg, rgba(17,24,39,.03), rgba(17,24,39,.0));
+    }
+    .productMock{
+      width:100%;
+      aspect-ratio: 4 / 3;
+      border-radius:22px;
+      border:1px dashed rgba(17,24,39,.18);
+      background:
+        radial-gradient(400px 250px at 35% 35%, rgba(99,102,241,.18), transparent 65%),
+        radial-gradient(350px 220px at 70% 55%, rgba(16,185,129,.12), transparent 60%),
+        linear-gradient(135deg, rgba(255,255,255,.9), rgba(248,250,252,.9));
+      display:grid;
+      place-items:center;
+      position:relative;
+      overflow:hidden;
+    }
+    .productMock .label{
+      position:absolute;
+      top:16px; left:16px;
+      padding:9px 12px;
+      border-radius:999px;
+      background:rgba(255,255,255,.8);
+      border:1px solid rgba(229,231,235,.9);
+      font-weight:800;
+      font-size:13px;
+      color:#111827;
+    }
+    .productMock .art{
+      font-size:78px;
+      filter: drop-shadow(0 20px 25px rgba(0,0,0,.12));
+      transform: rotate(-8deg);
+    }
+    .miniInfo{
+      padding:18px 22px;
+      border-top:1px solid rgba(229,231,235,.85);
+      display:flex;
+      justify-content:space-between;
+      gap:12px;
+      align-items:center;
+      background:rgba(255,255,255,.65);
+    }
+    .miniInfo .name{font-weight:900}
+    .miniInfo .price{font-weight:900; color:#111827}
+    .miniInfo .muted{color:var(--muted); font-weight:700; font-size:13px}
+
+    /* Sections */
+    section{padding:34px 0}
+    .sectionTitle{
+      display:flex; align-items:flex-end; justify-content:space-between;
+      gap:14px; flex-wrap:wrap;
+      margin-bottom:14px;
+    }
+    .sectionTitle h2{margin:0; font-size:24px; letter-spacing:-.4px}
+    .sectionTitle p{margin:0; color:var(--muted); font-weight:600}
+
+    /* Layout */
+    .grid{
+      display:grid;
+      grid-template-columns: repeat(12, 1fr);
+      gap:16px;
+    }
+    .card{
+      grid-column: span 12;
+      background:rgba(255,255,255,.75);
+      border:1px solid rgba(229,231,235,.85);
+      border-radius:var(--radius2);
+      box-shadow: var(--shadow);
+      overflow:hidden;
+    }
+
+    /* Product */
+    .product{
+      display:grid;
+      grid-template-columns: 1fr 1fr;
+    }
+    .productMedia{
+      padding:22px;
+      background:linear-gradient(180deg, rgba(99,102,241,.06), rgba(255,255,255,0));
+      border-right:1px solid rgba(229,231,235,.85);
+    }
+
+    /* ✅ Gallery (tavas bildes) */
+    .gallery{width:100%}
+    .mainImg{
+      width:100%;
+      border-radius:20px;
+      border:1px solid #e5e7eb;
+      background:white;
+      display:block;
+      object-fit:contain;
+      aspect-ratio: 1/1;
+    }
+    .thumbs{
+      display:flex;
+      gap:10px;
+      margin-top:12px;
+      flex-wrap:wrap;
+    }
+    .thumb{
+      width:76px;
+      height:76px;
+      object-fit:cover;
+      border-radius:12px;
+      border:2px solid transparent;
+      cursor:pointer;
+      background:white;
+    }
+    .thumb.active{border-color:#111827}
+
+    .productBody{
+      padding:26px;
+      display:flex;
+      flex-direction:column;
+      gap:12px;
+    }
+    .productBody h3{margin:0; font-size:22px; letter-spacing:-.3px}
+    .metaRow{
+      display:flex; align-items:center; justify-content:space-between;
+      gap:12px; flex-wrap:wrap;
+    }
+    .priceBig{font-size:28px; font-weight:950; letter-spacing:-.6px}
+    .bullets{
+      margin:0;
+      padding-left:18px;
+      color:var(--muted);
+      line-height:1.7;
+      font-weight:600;
+    }
+    .qtyRow{
+      display:flex; align-items:center; gap:10px; flex-wrap:wrap;
+      margin-top:4px;
+    }
+    .qty{
+      display:inline-flex;
+      align-items:center;
+      border:1px solid var(--line);
+      border-radius:14px;
+      overflow:hidden;
+      background:white;
+    }
+    .qty button{
+      width:40px; height:40px;
+      border:0;
+      background:transparent;
+      cursor:pointer;
+      font-size:18px;
+      font-weight:900;
+    }
+    .qty input{
+      width:52px; height:40px;
+      border:0;
+      text-align:center;
+      font-weight:900;
+      outline:none;
+    }
+    .note{
+      color:var(--muted);
+      font-size:13px;
+      font-weight:650;
+    }
+
+    /* Footer */
+    footer{
+      padding:26px 0 34px;
+      color:var(--muted);
+      font-weight:650;
+    }
+    .footerGrid{
+      display:flex; justify-content:space-between; gap:14px; flex-wrap:wrap;
+      border-top:1px solid rgba(229,231,235,.85);
+      padding-top:18px;
+    }
+
+    /* Cart Drawer */
+    .drawerBackdrop{
+      position:fixed; inset:0;
+      background: rgba(15,23,42,.45);
+      display:none;
+      z-index:80;
+    }
+    .drawer{
+      position:fixed;
+      top:0; right:0;
+      height:100%;
+      width:min(420px, 92vw);
+      background:rgba(255,255,255,.92);
+      backdrop-filter: blur(14px);
+      border-left:1px solid rgba(229,231,235,.9);
+      box-shadow: -20px 0 40px rgba(0,0,0,.12);
+      transform: translateX(100%);
+      transition: .2s transform ease;
+      z-index:90;
+      display:flex;
+      flex-direction:column;
+    }
+    .drawerHeader{
+      padding:18px 18px 12px;
+      display:flex; align-items:center; justify-content:space-between;
+      border-bottom:1px solid rgba(229,231,235,.85);
+    }
+    .drawerHeader .title{font-weight:950; font-size:18px}
+    .drawerBody{padding:14px 18px; overflow:auto; flex:1}
+    .cartItem{
+      display:flex; gap:12px;
+      padding:12px;
+      border:1px solid rgba(229,231,235,.9);
+      border-radius:18px;
+      background:rgba(255,255,255,.8);
+    }
+    .cartThumb{
+      width:64px; height:64px;
+      border-radius:16px;
+      border:1px solid rgba(229,231,235,.9);
+      background:linear-gradient(135deg,#ffffff,#f8fafc);
+      display:grid; place-items:center;
+      overflow:hidden;
+    }
+    .cartThumb img{width:100%; height:100%; object-fit:cover; display:block}
+    .cartInfo{flex:1}
+    .cartInfo .name{font-weight:900}
+    .cartInfo .sub{color:var(--muted); font-weight:650; font-size:13px; margin-top:2px}
+    .cartInfo .row{
+      display:flex; justify-content:space-between; align-items:center; gap:10px;
+      margin-top:10px;
+    }
+    .linkBtn{
+      border:0;
+      background:transparent;
+      color:#ef4444;
+      font-weight:900;
+      cursor:pointer;
+    }
+    .drawerFooter{
+      padding:14px 18px 18px;
+      border-top:1px solid rgba(229,231,235,.85);
+      display:grid;
+      gap:10px;
+    }
+    .totalRow{
+      display:flex; justify-content:space-between; align-items:center;
+      font-weight:950;
+      font-size:16px;
+    }
+    .small{
+      color:var(--muted);
+      font-weight:650;
+      font-size:12.5px;
+      line-height:1.5;
+    }
+
+    /* Responsive */
+    @media (max-width: 900px){
+      .heroGrid{grid-template-columns:1fr}
+      h1{font-size:38px}
+      .product{grid-template-columns:1fr}
+      .productMedia{border-right:0; border-bottom:1px solid rgba(229,231,235,.85)}
+      .navlinks{display:none}
+    }
+  </style>
+</head>
+
+<body>
+  <header class="topbar">
+    <div class="container">
+      <div class="nav">
+        <a class="brand" href="#top">
+          <div class="logo">Č</div>
+          <div>
+            <div style="line-height:1; font-size:16px;">Čībiņas</div>
+            <div style="line-height:1.1; font-size:12px; color:var(--muted); font-weight:700;">komforts katram solim</div>
+          </div>
+        </a>
+
+        <nav class="navlinks" aria-label="Galvenā navigācija">
+          <a href="#produkts">Produkts</a>
+          <a href="#par">Par mums</a>
+          <a href="#kontakti">Kontakti</a>
+        </nav>
+
+        <div class="actions">
+          <button class="btn" id="openCartBtn" aria-haspopup="dialog" aria-controls="cartDrawer" aria-label="Atvērt grozu">
+            🛒 Grozs <span class="badge" id="cartCount">0</span>
+          </button>
+          <a class="btn primary" href="#produkts">Apskatīt</a>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main id="top">
+    <div class="container">
+      <section class="hero">
+        <div class="heroGrid">
+          <div class="heroCard heroLeft">
+            <span class="kicker">🥿 Premium mājas apavi • Latvijā</span>
+            <h1>Ērtas čības, kuras negribas novilkt.</h1>
+            <p class="subtitle">
+              Minimālistisks dizains, patīkama sajūta un vienkārša iegāde.
+              Šobrīd veikalā: viens best-selleris — <b>Slipper čības</b>.
+            </p>
+
+            <div class="heroCtas">
+              <a class="btn primary" href="#produkts">🛍 Skatīt produktu</a>
+              <a class="btn" href="#par">Uzzināt vairāk</a>
+            </div>
+
+            <div class="trustRow" role="list">
+              <div class="trustPill" role="listitem">✅ Ātra piegāde LV</div>
+              <div class="trustPill" role="listitem">🧵 Kvalitātes kontrole</div>
+              <div class="trustPill" role="listitem">🔁 14 dienu atgriešana</div>
+            </div>
+          </div>
+
+          <div class="heroCard heroRight">
+            <div class="showcase">
+              <div class="productMock" aria-label="Produkta vizuālais paraugs">
+                <div class="label">Slipper čības</div>
+                <div class="art">🥿</div>
+              </div>
+            </div>
+            <div class="miniInfo">
+              <div>
+                <div class="name">Slipper čības</div>
+                <div class="muted">Komforts ikdienai</div>
+              </div>
+              <div style="text-align:right">
+                <div class="price">€18.99</div>
+                <div class="muted">PVN iekļauts</div>
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </section>
+
+      <section id="produkts">
+        <div class="sectionTitle">
+          <div>
+            <h2>Produkts</h2>
+            <p>Pašlaik pieejams viens produkts.</p>
+          </div>
+        </div>
+
+        <div class="grid">
+          <article class="card product" aria-label="Slipper čības produkta karte">
+            <!-- ✅ ŠEIT IR TAVAS BILDES -->
+            <div class="productMedia">
+              <div class="gallery">
+                <img id="mainImage" src="cibinas1.png" alt="Slipper čības – foto" class="mainImg"/>
+
+                <div class="thumbs" aria-label="Produkta foto priekšskatījumi">
+                  <img src="cibinas1.png" alt="Skats 1" class="thumb active" onclick="changeImage(this)"/>
+                  <img src="cibinas2.png" alt="Skats 2" class="thumb" onclick="changeImage(this)"/>
+                </div>
+              </div>
+            </div>
+
+            <div class="productBody">
+              <div class="metaRow">
+                <h3>Slipper čības</h3>
+                <div class="priceBig">€18.99</div>
+              </div>
+
+              <ul class="bullets">
+                <li>Mīksts iekšpuses komforts ikdienai</li>
+                <li>Universāls dizains mājām</li>
+                <li>Vienkārša kopšana un ilgstoša lietošana</li>
+              </ul>
+
+              <div class="qtyRow" aria-label="Daudzuma izvēle un pievienošana grozam">
+                <div class="qty" role="group" aria-label="Daudzums">
+                  <button type="button" id="decQty" aria-label="Samazināt daudzumu">−</button>
+                  <input id="qtyInput" type="number" min="1" max="99" value="1" inputmode="numeric" aria-label="Daudzums" />
+                  <button type="button" id="incQty" aria-label="Palielināt daudzumu">+</button>
+                </div>
+
+                <button class="btn primary" id="addToCartBtn">Pievienot grozam</button>
+                <span class="note">PVN iekļauts • Piegāde 1–3 darba dienās</span>
+              </div>
+            </div>
+          </article>
+        </div>
+      </section>
+
+      <section id="par">
+        <div class="sectionTitle">
+          <div>
+            <h2>Par mums</h2>
+            <p>Čībiņas — komforts, kvalitāte, vienkāršība.</p>
+          </div>
+        </div>
+
+        <div class="grid">
+          <div class="card" style="padding:22px;">
+            <p style="margin:0; color:var(--muted); font-weight:650; line-height:1.75;">
+              “Čībiņas” ir zīmols, kas koncentrējas uz vienu lietu — <b>ērtumu</b>.
+              Mēs izvēlamies tīru dizainu un praktisku pieeju, lai mājās justos labi katru dienu.
+              Šī lapa ir sagatavota kā profesionāls pamats e-veikalam (produkts, grozs, struktūra).
+            </p>
+          </div>
+        </div>
+      </section>
+
+      <section id="kontakti">
+        <div class="sectionTitle">
+          <div>
+            <h2>Kontakti</h2>
+            <p>Sazinies ar mums par pasūtījumiem un sadarbību.</p>
+          </div>
+        </div>
+
+        <div class="grid">
+          <div class="card" style="padding:22px; display:flex; justify-content:space-between; gap:16px; flex-wrap:wrap;">
+            <div>
+              <div style="font-weight:950; margin-bottom:8px;">Čībiņas</div>
+              <div style="color:var(--muted); font-weight:650; line-height:1.7;">
+                Rīga, Latvija<br/>
+                E-pasts: <a href="mailto:info@cibinas.lv" style="text-decoration:underline;">info@cibinas.lv</a><br/>
+                Tālrunis: <a href="tel:+37120000000" style="text-decoration:underline;">+371 20000000</a>
+              </div>
+            </div>
+            <div style="min-width:240px">
+              <div style="font-weight:900; margin-bottom:8px;">Darba laiks</div>
+              <div style="color:var(--muted); font-weight:650; line-height:1.7;">
+                P–Pk: 10:00–18:00<br/>
+                Se–Sv: brīvs
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <footer>
+        <div class="footerGrid">
+          <div>© <span id="year"></span> Čībiņas. Visas tiesības aizsargātas.</div>
+          <div style="display:flex; gap:12px; flex-wrap:wrap;">
+            <a href="#top" style="text-decoration:underline;">Uz augšu</a>
+            <a href="#produkts" style="text-decoration:underline;">Produkts</a>
+            <a href="#kontakti" style="text-decoration:underline;">Kontakti</a>
+          </div>
+        </div>
+      </footer>
+    </div>
+  </main>
+
+  <!-- Cart Drawer -->
+  <div class="drawerBackdrop" id="drawerBackdrop" aria-hidden="true"></div>
+
+  <aside class="drawer" id="cartDrawer" role="dialog" aria-modal="true" aria-label="Grozs">
+    <div class="drawerHeader">
+      <div class="title">🛒 Grozs</div>
+      <button class="btn" id="closeCartBtn" aria-label="Aizvērt grozu">✕</button>
+    </div>
+
+    <div class="drawerBody" id="cartBody">
+      <p class="small" id="emptyText">Grozs ir tukšs. Pievieno “Slipper čības”, lai turpinātu.</p>
+      <div id="cartItemWrap" style="display:none;"></div>
+    </div>
+
+    <div class="drawerFooter">
+      <div class="totalRow">
+        <span>Kopā</span>
+        <span id="cartTotal">€0.00</span>
+      </div>
+      <button class="btn primary" id="checkoutBtn">Turpināt uz apmaksu</button>
+      <div class="small">Demo režīms: “Apmaksa” parāda paziņojumu. Ja vēlies, varu pieslēgt Stripe / PayPal un īstu checkout lapu.</div>
+    </div>
+  </aside>
+
+  <script>
+    // --- Single product ---
+    const PRODUCT = {
+      id: "slipper-cibas",
+      name: "Slipper čības",
+      price: 18.99
+    };
+
+    const fmtEUR = (n) => "€" + Number(n).toFixed(2);
+
+    const state = { qty: 0 };
+
+    // Elements
+    const yearEl = document.getElementById("year");
+    const qtyInput = document.getElementById("qtyInput");
+    const decQty = document.getElementById("decQty");
+    const incQty = document.getElementById("incQty");
+    const addToCartBtn = document.getElementById("addToCartBtn");
+
+    const cartCount = document.getElementById("cartCount");
+    const cartTotal = document.getElementById("cartTotal");
+
+    const openCartBtn = document.getElementById("openCartBtn");
+    const closeCartBtn = document.getElementById("closeCartBtn");
+    const drawer = document.getElementById("cartDrawer");
+    const backdrop = document.getElementById("drawerBackdrop");
+
+    const emptyText = document.getElementById("emptyText");
+    const cartItemWrap = document.getElementById("cartItemWrap");
+    const checkoutBtn = document.getElementById("checkoutBtn");
+
+    // ✅ Gallery switch
+    function changeImage(el){
+      const main = document.getElementById("mainImage");
+      main.src = el.src;
+
+      document.querySelectorAll(".thumb").forEach(t => t.classList.remove("active"));
+      el.classList.add("active");
+    }
+
+    // Init
+    yearEl.textContent = new Date().getFullYear();
+
+    function clampQty(v){
+      const n = Number(v);
+      if (!Number.isFinite(n)) return 1;
+      return Math.max(1, Math.min(99, Math.floor(n)));
+    }
+
+    function renderCart(){
+      cartCount.textContent = String(state.qty);
+      const total = state.qty * PRODUCT.price;
+      cartTotal.textContent = fmtEUR(total);
+
+      if (state.qty <= 0){
+        emptyText.style.display = "block";
+        cartItemWrap.style.display = "none";
+        cartItemWrap.innerHTML = "";
+        return;
+      }
+
+      emptyText.style.display = "none";
+      cartItemWrap.style.display = "block";
+
+      cartItemWrap.innerHTML = `
+        <div class="cartItem" aria-label="Grozā esošais produkts">
+          <div class="cartThumb"><img src="cibinas1.png" alt="Slipper čības"/></div>
+          <div class="cartInfo">
+            <div class="name">${PRODUCT.name}</div>
+            <div class="sub">${fmtEUR(PRODUCT.price)} • PVN iekļauts</div>
+            <div class="row">
+              <div class="qty" role="group" aria-label="Daudzums grozā">
+                <button type="button" id="cartDec" aria-label="Samazināt daudzumu">−</button>
+                <input id="cartQty" type="number" min="1" max="99" value="${state.qty}" inputmode="numeric" aria-label="Daudzums grozā" />
+                <button type="button" id="cartInc" aria-label="Palielināt daudzumu">+</button>
+              </div>
+              <button class="linkBtn" id="removeBtn" aria-label="Izņemt no groza">Noņemt</button>
+            </div>
+          </div>
+        </div>
+      `;
+
+      // Bind dynamic controls
+      const cartDec = document.getElementById("cartDec");
+      const cartInc = document.getElementById("cartInc");
+      const cartQty = document.getElementById("cartQty");
+      const removeBtn = document.getElementById("removeBtn");
+
+      cartDec.addEventListener("click", () => {
+        state.qty = Math.max(1, state.qty - 1);
+        renderCart();
+      });
+      cartInc.addEventListener("click", () => {
+        state.qty = Math.min(99, state.qty + 1);
+        renderCart();
+      });
+      cartQty.addEventListener("change", () => {
+        state.qty = clampQty(cartQty.value);
+        renderCart();
+      });
+      removeBtn.addEventListener("click", () => {
+        state.qty = 0;
+        renderCart();
+      });
+    }
+
+    function openDrawer(){
+      backdrop.style.display = "block";
+      drawer.style.transform = "translateX(0)";
+      backdrop.setAttribute("aria-hidden", "false");
+      closeCartBtn.focus();
+    }
+    function closeDrawer(){
+      drawer.style.transform = "translateX(100%)";
+      backdrop.setAttribute("aria-hidden", "true");
+      setTimeout(() => { backdrop.style.display = "none"; }, 180);
+      openCartBtn.focus();
+    }
+
+    // Qty controls (product page)
+    decQty.addEventListener("click", () => {
+      qtyInput.value = String(Math.max(1, clampQty(qtyInput.value) - 1));
+    });
+    incQty.addEventListener("click", () => {
+      qtyInput.value = String(Math.min(99, clampQty(qtyInput.value) + 1));
+    });
+    qtyInput.addEventListener("change", () => {
+      qtyInput.value = String(clampQty(qtyInput.value));
+    });
+
+    addToCartBtn.addEventListener("click", () => {
+      const add = clampQty(qtyInput.value);
+      state.qty = Math.min(99, state.qty + add);
+      renderCart();
+      openDrawer();
+    });
+
+    // Drawer controls
+    openCartBtn.addEventListener("click", openDrawer);
+    closeCartBtn.addEventListener("click", closeDrawer);
+    backdrop.addEventListener("click", closeDrawer);
+    document.addEventListener("keydown", (e) => {
+      if (e.key === "Escape" && backdrop.style.display === "block") closeDrawer();
+    });
+
+    checkoutBtn.addEventListener("click", () => {
+      if (state.qty <= 0){
+        alert("Grozs ir tukšs.");
+        return;
+      }
+      alert("Demo: Šeit būtu apmaksa. Ja vēlies, varu pieslēgt Stripe/PayPal un izveidot checkout lapu.");
+    });
+
+    // Initial render
+    renderCart();
+  </script>
+</body>
+</html>
